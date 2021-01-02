@@ -29,24 +29,7 @@ const dummyQueries = {
     integrationId: 'e145d368-0eab-4e53-b448-44ada1472182',
     name: 'Query 2',
     query: `
-      SELECT * FROM employees;
-    `,
-    history: [],
-    members: [{
-      email: 'samurai.jack@example.com',
-      permission: 'admin',
-    }, {
-      email: 'jane.doe@example.com',
-      permission: 'write',
-    }],
-    createdAt: moment(),
-  },
-  '4fa450dc-790c-4127-854d-38f9f7656394': {
-    id: '4fa450dc-790c-4127-854d-38f9f7656394',
-    integrationId: 'e145d368-0eab-4e53-b448-44ada1472182',
-    name: 'Query 3',
-    query: `
-      SELECT * FROM employees;
+      SELECT * FROM branches;
     `,
     history: [],
     members: [{
@@ -81,24 +64,7 @@ const dummyQueries = {
     integrationId: 'd1dc5505-555c-4ae5-a0b3-5ed8a5119fd1',
     name: 'Query 2',
     query: `
-      SELECT * FROM employees;
-    `,
-    history: [],
-    members: [{
-      email: 'samurai.jack@example.com',
-      permission: 'admin',
-    }, {
-      email: 'jane.doe@example.com',
-      permission: 'write',
-    }],
-    createdAt: moment(),
-  },
-  '8b19901d-efb2-48ef-8dd8-0aca94890b25': {
-    id: '8b19901d-efb2-48ef-8dd8-0aca94890b25',
-    integrationId: 'd1dc5505-555c-4ae5-a0b3-5ed8a5119fd1',
-    name: 'Query 3',
-    query: `
-      SELECT * FROM employees;
+      SELECT * FROM branches;
     `,
     history: [],
     members: [{

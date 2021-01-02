@@ -8,7 +8,48 @@ const dummyIntegrations = {
     type: 'pg',
     credentials: {},
     resources: {
-      tables: {},
+      tables: {
+        employees: {
+          name: 'employees',
+          columns: {
+            id: {
+              type: 'INT PRIMARY KEY',
+            },
+            branch_id: {
+              type: 'INT',
+            },
+            email: {
+              type: 'VARCHAR(40)',
+            },
+            age: {
+              type: 'INT',
+            },
+            first_name: {
+              type: 'VARCHAR(40)',
+            },
+            last_name: {
+              type: 'VARCHAR(40)',
+            },
+            contact: {
+              type: 'VARCHAR(20)',
+            },
+          },
+        },
+        branches: {
+          name: 'branches',
+          columns: {
+            id: {
+              type: 'INT PRIMARY KEY',
+            },
+            manager_id: {
+              type: 'INT',
+            },
+            name: {
+              type: 'VARCHAR(40)',
+            },
+          },
+        },
+      },
     },
     createdAt: moment(),
   },
@@ -18,7 +59,48 @@ const dummyIntegrations = {
     type: 'mysql',
     credentials: {},
     resources: {
-      tables: {},
+      tables: {
+        employees: {
+          name: 'employees',
+          columns: {
+            id: {
+              type: 'INT PRIMARY KEY',
+            },
+            branch_id: {
+              type: 'INT',
+            },
+            email: {
+              type: 'VARCHAR(40)',
+            },
+            first_name: {
+              type: 'VARCHAR(40)',
+            },
+            last_name: {
+              type: 'VARCHAR(40)',
+            },
+            age: {
+              type: 'INT',
+            },
+            contact: {
+              type: 'VARCHAR(20)',
+            },
+          },
+        },
+        branches: {
+          name: 'branches',
+          columns: {
+            id: {
+              type: 'INT PRIMARY KEY',
+            },
+            manager_id: {
+              type: 'INT',
+            },
+            name: {
+              type: 'VARCHAR(40)',
+            },
+          },
+        },
+      },
     },
     createdAt: moment(),
   },
