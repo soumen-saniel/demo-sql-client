@@ -20,8 +20,15 @@
     "gatsby": "^2.26.1",
     "gatsby-plugin-emotion": "^5.1.0",
     "gatsby-plugin-offline": "^3.7.1",
+    "gatsby-plugin-prefetch-google-fonts": "^1.4.3",
+    "moment": "^2.29.1",
+    "normalize.css": "^8.0.1",
+    "re-resizable": "^6.9.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "eslint": "^7.17.0",

@@ -1,6 +1,12 @@
 var plugins = [{
       plugin: require('/Users/soumensaniel/Work/personal/demo-sql-client/node_modules/gatsby-plugin-offline/gatsby-ssr'),
       options: {"plugins":[]},
+    },{
+      plugin: require('/Users/soumensaniel/Work/personal/demo-sql-client/node_modules/gatsby-plugin-prefetch-google-fonts/gatsby-ssr'),
+      options: {"plugins":[],"fonts":[{"family":"Montserrat","variants":["400","500","600","700"]}]},
+    },{
+      plugin: require('/Users/soumensaniel/Work/personal/demo-sql-client/gatsby-ssr'),
+      options: {"plugins":[]},
     }]
 // During bootstrap, we write requires at top of this file which looks like:
 // var plugins = [
