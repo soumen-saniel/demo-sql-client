@@ -8,7 +8,7 @@ const TabBar = () => {
 
   return (
     <section css={classes.root}>
-      Hello
+      Tabs
     </section>
   );
 };

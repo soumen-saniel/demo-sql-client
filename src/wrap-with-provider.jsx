@@ -1,24 +1,31 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { Global, ThemeProvider } from '@emotion/react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { ThemeProvider as MaterialThemeProvider } from '@material-ui/core/styles';
 import { Provider } from 'react-redux';
 
 // Store
-import createStore from './state/createStore';
+import store from './state/createStore';
 
 // Styles
-import 'normalize.css';
-import theme from './ui/styles/theme';
+import theme, { materialTheme } from './ui/styles/theme';
 import globalStyles from './ui/styles/global';
 
 // eslint-disable-next-line react/display-name,react/prop-types
-export default ({ element }) => {
-  const store = createStore();
-  return (
+export default ({ element }) => (
+  <>
+    <Helmet>
+      <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+    </Helmet>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <Global styles={globalStyles} />
-        {element}
+        <MaterialThemeProvider theme={materialTheme}>
+          <CssBaseline />
+          <Global styles={globalStyles} />
+          {element}
+        </MaterialThemeProvider>
       </ThemeProvider>
     </Provider>
-  );
-};
+  </>
+);

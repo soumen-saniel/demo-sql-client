@@ -2,8 +2,11 @@ var plugins = [{
       plugin: require('/Users/soumensaniel/Work/personal/demo-sql-client/node_modules/gatsby-plugin-offline/gatsby-ssr'),
       options: {"plugins":[]},
     },{
-      plugin: require('/Users/soumensaniel/Work/personal/demo-sql-client/node_modules/gatsby-plugin-prefetch-google-fonts/gatsby-ssr'),
-      options: {"plugins":[],"fonts":[{"family":"Montserrat","variants":["400","500","600","700"]}]},
+      plugin: require('/Users/soumensaniel/Work/personal/demo-sql-client/node_modules/gatsby-plugin-google-fonts/gatsby-ssr'),
+      options: {"plugins":[],"fonts":["Montserrat:400,500,600,700"],"display":"swap"},
+    },{
+      plugin: require('/Users/soumensaniel/Work/personal/demo-sql-client/node_modules/gatsby-plugin-material-ui/gatsby-ssr'),
+      options: {"plugins":[]},
     },{
       plugin: require('/Users/soumensaniel/Work/personal/demo-sql-client/gatsby-ssr'),
       options: {"plugins":[]},

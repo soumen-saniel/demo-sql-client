@@ -9,13 +9,17 @@ module.exports = {
     'gatsby-plugin-offline',
     // Plugin for using Google fonts
     {
-      resolve: 'gatsby-plugin-prefetch-google-fonts',
+      resolve: 'gatsby-plugin-google-fonts',
       options: {
-        fonts: [{
-          family: 'Montserrat',
-          variants: ['400', '500', '600', '700'],
-        }],
+        fonts: [
+          'Montserrat:400,500,600,700',
+        ],
+        display: 'swap',
       },
+    },
+    {
+      resolve: 'gatsby-plugin-material-ui',
+      options: {},
     },
   ],
 };

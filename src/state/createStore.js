@@ -1,4 +1,6 @@
-import { combineReducers, createStore } from 'redux';
+import { createStore } from 'redux';
+import reduceReducers from 'reduce-reducers';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import integrations, { initialState as integrationsState } from './integrations';
 import queries, { initialState as queriesState } from './queries';
@@ -12,11 +14,12 @@ const initialState = {
   ...userState,
 };
 
-const rootReducer = combineReducers({
+const rootReducer = reduceReducers(
+  initialState,
   integrations,
   queries,
   tabs,
   user,
-});
+);
 
-export default () => createStore(rootReducer, initialState);
+export default createStore(rootReducer, composeWithDevTools());
