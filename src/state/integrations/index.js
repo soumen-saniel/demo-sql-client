@@ -142,8 +142,8 @@ const reducer = (state = initialState, action) => {
  * Set current integration
  * @param {string} integrationId
  */
-export const selectIntegration = (integrationId) => async (dispatch, getState) => {
-  const state = await getState();
+export const selectIntegration = (integrationId) => (dispatch, getState) => {
+  const state = getState();
   // Check if selected integration exists
   if (state.integrations && state.integrations[integrationId]) {
     dispatch({

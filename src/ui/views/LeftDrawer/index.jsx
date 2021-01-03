@@ -1,5 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {Resizable} from 're-resizable';
+
+// Actions
+import {setLeftDrawerWidth} from '../../../state/ui';
 
 import IntegrationSelect from './IntegrationSelect';
 import TableSection from './TablesSection';
@@ -11,9 +16,9 @@ import ProfileSettins from '../ProfileSettings';
 // Styles
 import classes from './styles';
 
-const LeftDrawer = () => {
-  useEffect(() => {});
-
+const LeftDrawer = ({
+  setLeftDrawerWidth,
+}) => {
   return (
     <Resizable
       css={classes.root}
@@ -22,7 +27,10 @@ const LeftDrawer = () => {
         width: 250,
         height: '100vh',
       }}
-      minWidth={200}
+      onResizeStop={(e, direction, ref) => {
+        setLeftDrawerWidth(ref.clientWidth);
+      }}
+      minWidth={250}
       maxWidth={500}
     >
       <div css={classes.logoContainer}>
@@ -36,4 +44,10 @@ const LeftDrawer = () => {
   );
 };
 
-export default LeftDrawer;
+LeftDrawer.propTypes = {
+  setLeftDrawerWidth: PropTypes.func,
+};
+
+export default connect(null, {
+  setLeftDrawerWidth,
+})(LeftDrawer);

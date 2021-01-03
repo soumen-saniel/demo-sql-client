@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import moment from 'moment';
 
+// Actions
+import {addTab} from '../../../../state/tabs';
+import {deleteQuery} from '../../../../state/queries';
+
 // Components
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -18,7 +22,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import classes from './styles';
 
 const QueriesSection = ({
+  addTab,
   currentTab,
+  deleteQuery,
   queries,
 }) => {
   const [expanded, setExpanded] = useState(true);
@@ -33,12 +39,19 @@ const QueriesSection = ({
       return (
         <>
           <div
-            css={classes.query}
+            css={(theme) => classes.query(theme, selected)}
             key={query.id}
+            onClick={() => addTab(query.id)}
           >
             <CodeIcon css={(theme) => classes.icon(theme, selected)} />
             <div css={classes.queryName}>{query.name}</div>
-            <CloseIcon css={classes.icon} />
+            <CloseIcon
+              css={classes.icon}
+              onClick={(e) => {
+                e.stopPropagation();
+                deleteQuery(query.id);
+              }}
+            />
           </div>
           {selected && (
             <div css={classes.historyList}>
@@ -82,9 +95,11 @@ const QueriesSection = ({
 };
 
 QueriesSection.propTypes = {
+  addTab: PropTypes.func,
   currentTab: PropTypes.shape({
     queryId: PropTypes.string,
   }),
+  deleteQuery: PropTypes.func,
   queries: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
@@ -114,4 +129,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(QueriesSection);
+export default connect(mapStateToProps, {
+  addTab,
+  deleteQuery,
+})(QueriesSection);

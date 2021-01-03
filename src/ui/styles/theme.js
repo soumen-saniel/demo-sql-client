@@ -58,10 +58,10 @@ export const materialTheme = createMuiTheme({
         minHeight: 40,
         padding: 0,
         textTransform: 'none',
-      },
-      selected: {
-        background: theme.palette.containerDark,
-        color: theme.palette.secondary,
+        '&$selected': {
+          background: theme.palette.containerDark,
+          color: theme.palette.secondary,
+        },
       },
     },
     MuiTabs: {

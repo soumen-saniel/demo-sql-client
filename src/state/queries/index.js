@@ -1,6 +1,8 @@
 import moment from 'moment';
 import {v4 as uuid} from 'uuid';
 
+import {addTab, deleteTab} from '../tabs';
+
 // Dummy data
 const dummyQueries = {
   // PG queries
@@ -144,8 +146,8 @@ const Reducer = (state = initialState, action) => {
  * Create new query
  * @param {string} query
  */
-export const createQuery = (query = '') => async (dispatch, getState) => {
-  const state = await getState();
+export const createQuery = (query = '') => (dispatch, getState) => {
+  const state = getState();
   if (state.currentIntegration) {
     const newQuery = {
       id: uuid(),
@@ -164,14 +166,16 @@ export const createQuery = (query = '') => async (dispatch, getState) => {
       type: actions.CREATE_QUERY,
       payload: newQuery,
     });
+
+    dispatch(addTab(newQuery.id));
   }
 };
 /**
  * Update query
  * @param {object} query
  */
-export const updateQuery = (query = {}) => async (dispatch, getState) => {
-  const state = await getState();
+export const updateQuery = (query = {}) => (dispatch, getState) => {
+  const state = getState();
   const savedQuery = state.queries[query.id];
   if (savedQuery) {
     dispatch({
@@ -187,7 +191,14 @@ export const updateQuery = (query = {}) => async (dispatch, getState) => {
  * Delete query
  * @param {string} queryId
  */
-export const deleteQuery = (queryId) => (dispatch) => {
+export const deleteQuery = (queryId) => (dispatch, getState) => {
+  const state = getState();
+  const tab = state.tabs.find((tab) => tab.queryId === queryId);
+
+  if (tab && tab.id) {
+    dispatch(deleteTab(tab.id));
+  }
+
   dispatch({
     type: actions.DELETE_QUERY,
     payload: queryId,
@@ -197,8 +208,8 @@ export const deleteQuery = (queryId) => (dispatch) => {
  * Save query histor. Only latest 10 are saved
  * @param {object} query
  */
-export const saveHistory = (query = {}) => async (dispatch, getState) => {
-  const state = await getState();
+export const saveHistory = (query = {}) => (dispatch, getState) => {
+  const state = getState();
   if (state.queries[query.id]) {
     dispatch({
       type: actions.UPDATE_QUERY,
@@ -222,80 +233,86 @@ export const saveHistory = (query = {}) => async (dispatch, getState) => {
  * @param {string} permission
  * @param {string} queryId
  */
-export const addTeamMember = (email, permission, queryId) => async (dispatch, getState) => {
-  const state = await getState();
-  const query = Object.values(state.queries).find((item) => item.id === queryId);
-  if (query && email.trim() !== state.user.email) {
-    const member = query.members.find((item) => item.email === email.trim());
-    if (!member) {
-      query.members = [
-        ...query.members,
-        {
-          email: email.trim(),
-          permission,
-        },
-      ];
-    } else if (member.permission !== permission) {
-      query.members = query.members.map((item) => {
-        if (item.email === email.trim()) {
-          return {
-            ...item,
+export const addTeamMember = (email, permission, queryId) =>
+  (dispatch, getState) => {
+    const state = getState();
+    const query = Object.values(state.queries)
+        .find((item) => item.id === queryId);
+    if (query && email.trim() !== state.user.email) {
+      const member = query.members.find((item) => item.email === email.trim());
+      if (!member) {
+        query.members = [
+          ...query.members,
+          {
+            email: email.trim(),
             permission,
-          };
-        }
+          },
+        ];
+      } else if (member.permission !== permission) {
+        query.members = query.members.map((item) => {
+          if (item.email === email.trim()) {
+            return {
+              ...item,
+              permission,
+            };
+          }
 
-        return item;
-      });
-    }
-
-    dispatch({
-      type: actions.UPDATE_QUERY,
-      payload: query,
-    });
-  }
-};
-/**
- * Update team member's permission
- * @param {string} email
- * @param {string} permission
- * @param {string} queryId
- */
-export const updateMemberPermission = (email, permission, queryId) => async (dispatch, getState) => {
-  const state = await getState();
-  const query = Object.values(state.queries).find((item) => item.id === queryId);
-  if (query && email.trim() !== state.user.email) {
-    const member = query.members.find((item) => item.email === email.trim());
-    if (member && member.permission !== permission) {
-      query.members = query.members.map((item) => {
-        if (item.email === email.trim()) {
-          return {
-            ...item,
-            permission,
-          };
-        }
-
-        return item;
-      });
+          return item;
+        });
+      }
 
       dispatch({
         type: actions.UPDATE_QUERY,
         payload: query,
       });
     }
-  }
-};
+  };
+/**
+ * Update team member's permission
+ * @param {string} email
+ * @param {string} permission
+ * @param {string} queryId
+ */
+export const updateMemberPermission = (email, permission, queryId) =>
+  (dispatch, getState) => {
+    const state = getState();
+    const query = Object.values(state.queries)
+        .find((item) => item.id === queryId);
+    if (query && email.trim() !== state.user.email) {
+      const member = query.members.find((item) => item.email === email.trim());
+      if (member && member.permission !== permission) {
+        query.members = query.members.map((item) => {
+          if (item.email === email.trim()) {
+            return {
+              ...item,
+              permission,
+            };
+          }
+
+          return item;
+        });
+
+        dispatch({
+          type: actions.UPDATE_QUERY,
+          payload: query,
+        });
+      }
+    }
+  };
 /**
  * Remove team member from query
  * @param {string} email
  * @param {string} queryId
  */
-export const removeTeamMember = (email, queryId) => async (dispatch, getState) => {
-  const state = await getState();
-  const query = Object.values(state.queries).find((item) => item.id === queryId);
+export const removeTeamMember = (email, queryId) => (dispatch, getState) => {
+  const state = getState();
+  const query = Object.values(state.queries)
+      .find((item) => item.id === queryId);
   if (query && email.trim() !== state.user.email) {
-    const find = query.members.indexOf((member) => member.email === email.trim);
+    const find = query.members.findIndex((member) => member.email === email.trim);
     if (find > -1) {
-      query.members = query.members.filter((member) => member.email !== email.trim());
+      query.members = query.members
+          .filter((member) => member.email !== email.trim());
       dispatch({
         type: actions.UPDATE_QUERY,
         payload: query,

@@ -23,6 +23,7 @@
     "ag-grid-react": "^24.1.1",
     "codemirror": "^5.42.2",
     "gatsby": "^2.26.1",
+    "gatsby-plugin-alias-imports": "^1.0.5",
     "gatsby-plugin-emotion": "^5.1.0",
     "gatsby-plugin-google-fonts": "^1.0.1",
     "gatsby-plugin-material-ui": "^2.1.10",
@@ -39,6 +40,7 @@
     "reduce-reducers": "^1.0.4",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

@@ -65,9 +65,9 @@ const Reducer = (state = initialState, action) => {
  * Add tab
  * @param {string} queryId
  */
-export const addTab = (queryId) => async (dispatch, getState) => {
-  const state = await getState();
-  const find = state.tabs.indexOf((tab) => tab.queryId === queryId);
+export const addTab = (queryId) => (dispatch, getState) => {
+  const state = getState();
+  const find = state.tabs.findIndex((tab) => tab.queryId === queryId);
   if (find > -1) {
     dispatch({
       type: actions.SET_CURRENT_TAB,
@@ -90,7 +90,7 @@ export const addTab = (queryId) => async (dispatch, getState) => {
 
     dispatch({
       type: actions.SET_CURRENT_TAB,
-      payload: state.currentTab !== null ? state.currentTab + 1 : 0,
+      payload: state.currentTab !== null ? state.tabs.length : 0,
     });
   }
 };
@@ -98,8 +98,8 @@ export const addTab = (queryId) => async (dispatch, getState) => {
  * Update tab
  * @param {object} tab
  */
-export const updateTab = (tab = {}) => async (dispatch, getState) => {
-  const state = await getState();
+export const updateTab = (tab = {}) => (dispatch, getState) => {
+  const state = getState();
   const find = state.tabs.find((item) => item.id === tab.id);
   if (tab.id && find.id) {
     dispatch({
@@ -112,9 +112,9 @@ export const updateTab = (tab = {}) => async (dispatch, getState) => {
  * Delete tab
  * @param {staring} tabId
  */
-export const deleteTab = (tabId) => async (dispatch, getState) => {
-  const state = await getState();
-  const find = state.tabs.indexOf((item) => item.id === tabId);
+export const deleteTab = (tabId) => (dispatch, getState) => {
+  const state = getState();
+  const find = state.tabs.findIndex((item) => item.id === tabId);
   if (tabId && find > -1) {
     dispatch({
       type: actions.DELETE_TAB,
@@ -123,11 +123,17 @@ export const deleteTab = (tabId) => async (dispatch, getState) => {
 
     let currentTab = null;
 
-    if (state.tabs.length > 0) {
-      if (find > 0) {
-        currentTab = find - 1;
+    if (state.tabs.length > 1) {
+      if (state.currentTab < find) {
+        currentTab = state.currentTab;
+      } else if (state.currentTab > find) {
+        currentTab = state.currentTab - 1;
       } else {
-        currentTab = 0;
+        if (state.tabs.length - 1 > find) {
+          currentTab = state.currentTab;
+        } else {
+          currentTab = state.currentTab - 1;
+        }
       }
     }
 
@@ -141,13 +147,18 @@ export const deleteTab = (tabId) => async (dispatch, getState) => {
  * Set current tab
  * @param {string} queryId
  */
-export const setCurrentTab = (queryId) => async (dispatch, getState) => {
-  const state = await getState();
-  const find = state.tabs.indexOf((tab) => tab.queryId === queryId);
+export const setCurrentTab = (tabId) => (dispatch, getState) => {
+  const state = getState();
+  const find = state.tabs.findIndex((tab) => tab.id === tabId);
   if (find > -1) {
     dispatch({
       type: actions.SET_CURRENT_TAB,
       payload: find,
+    });
+  } else {
+    dispatch({
+      type: actions.SET_CURRENT_TAB,
+      payload: null,
     });
   }
 };

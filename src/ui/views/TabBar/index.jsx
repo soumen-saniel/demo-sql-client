@@ -1,6 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+
+// Actions
+import {deleteTab, setCurrentTab} from '../../../state/tabs';
+import {createQuery} from '../../../state/queries';
 
 // Components
 import Tabs from '@material-ui/core/Tabs';
@@ -16,25 +20,32 @@ import classes from './styles';
 
 const TabBar = ({
   currentTab,
+  createQuery,
+  deleteTab,
+  leftDrawerWidth,
+  setCurrentTab,
   tabs,
 }) => {
-  useEffect(() => {}, []);
-
   return (
     <section css={classes.root}>
       <div css={(theme) => classes.tabButton(theme, !currentTab.id)}>
         <DashboardIcon
           css={(theme) => classes.tabButtonIcon(theme, !currentTab.id)}
+          onClick={() => setCurrentTab(null)}
         />
       </div>
       <Tabs
-        onChange={() => {}}
+        css={classes.tabs(leftDrawerWidth)}
+        onChange={(e, value) => {
+          e.stopPropagation();
+          setCurrentTab(value);
+        }}
         variant='scrollable'
-        value={1}
+        value={currentTab.id}
         scrollButtons='auto'
       >
         {tabs.map((tab) => {
-          const selected = tab.id === 1;
+          const selected = tab.id === currentTab.id;
           return (
             <Tab
               disableFocusRipple
@@ -43,7 +54,13 @@ const TabBar = ({
               label={
                 <div css={(theme) => classes.tab(theme, selected)}>
                   <span>{tab.name}</span>
-                  <CloseIcon css={(theme) => classes.icon(theme, selected)} />
+                  <CloseIcon
+                    css={(theme) => classes.icon(theme, selected)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      deleteTab(tab.id);
+                    }}
+                  />
                 </div>
               }
               value={tab.id}
@@ -51,27 +68,16 @@ const TabBar = ({
           );
         })}
       </Tabs>
-      <div css={[classes.tabButton, classes.addTabButton]}>
-        <AddIcon css={classes.addButtonIcon} />
+      <div
+        css={[classes.tabButton, classes.addTabButton]}
+        onClick={() => createQuery()}
+      >
+        <AddIcon
+          css={classes.addButtonIcon}
+        />
       </div>
     </section>
   );
-};
-
-const mapStateToProps = (state) => {
-  return {
-    currentTab: {
-      id: 1,
-      name: 'Query tab 1',
-    },
-    tabs: [{
-      id: 1,
-      name: 'Query tab 1',
-    }, {
-      id: 2,
-      name: 'Query tab 2',
-    }],
-  };
 };
 
 TabBar.propTypes = {
@@ -79,10 +85,35 @@ TabBar.propTypes = {
     id: PropTypes.node,
     name: PropTypes.string,
   }),
+  createQuery: PropTypes.func,
+  deleteTab: PropTypes.func,
+  leftDrawerWidth: PropTypes.number,
+  setCurrentTab: PropTypes.func,
   tabs: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.node,
     name: PropTypes.string,
   })),
 };
 
-export default connect(mapStateToProps)(TabBar);
+TabBar.defaultProps = {
+  currentTab: {},
+  tabs: [],
+};
+
+const mapStateToProps = (state) => {
+  const currentTab = state.currentTab !== null ?
+    state.tabs[state.currentTab] || {} :
+    {};
+
+  return {
+    currentTab,
+    leftDrawerWidth: state.leftDrawerWidth,
+    tabs: state.tabs,
+  };
+};
+
+export default connect(mapStateToProps, {
+  createQuery,
+  deleteTab,
+  setCurrentTab,
+})(TabBar);

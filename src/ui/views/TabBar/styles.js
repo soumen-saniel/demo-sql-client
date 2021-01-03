@@ -7,8 +7,14 @@ classes.root = css`
   display: flex;
   flex-flow: row nowrap;
   height: 40px;
+  overflow: hidden;
   padding-right: 20px;
+  position: relative;
   width: 100%;
+`;
+
+classes.tabs = (drawerWidth) => css`
+  max-width: calc(100vw - ${drawerWidth + 80}px);
 `;
 
 classes.tabButton = (theme, selected) => css`
