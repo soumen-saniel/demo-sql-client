@@ -50,6 +50,27 @@ export const materialTheme = createMuiTheme({
         height: 25,
       },
     },
+    MuiTab: {
+      root: {
+        fontSize: 14,
+        height: 40,
+        minHeight: 40,
+        padding: 0,
+        textTransform: 'none',
+      },
+      selected: {
+        background: theme.palette.containerDark,
+        color: theme.palette.secondary,
+      },
+    },
+    MuiTabs: {
+      root: {
+        minHeight: 30,
+      },
+      indicator: {
+        display: 'none',
+      },
+    },
   },
 });
 

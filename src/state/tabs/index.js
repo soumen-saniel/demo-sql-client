@@ -1,4 +1,5 @@
-import { v4 as uuid } from 'uuid';
+/* eslint-disable valid-jsdoc */
+import {v4 as uuid} from 'uuid';
 
 // Action types
 const actions = {

@@ -5,7 +5,7 @@ const classes = {};
 classes.root = css`
   display: flex;
   flex-flow: column;
-  height: calc(100vh - 30px);
+  height: calc(100vh - 40px);
   overflow: hidden;
   position: relative;
 `;
