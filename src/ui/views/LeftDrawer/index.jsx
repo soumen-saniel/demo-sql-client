@@ -3,6 +3,7 @@ import {Resizable} from 're-resizable';
 
 import IntegrationSelect from './IntegrationSelect';
 import TableSection from './TablesSection';
+import QueriesSection from './QueriesSection';
 
 // Views
 import ProfileSettins from '../ProfileSettings';
@@ -30,6 +31,7 @@ const LeftDrawer = () => {
       </div>
       <IntegrationSelect />
       <TableSection />
+      <QueriesSection />
     </Resizable>
   );
 };

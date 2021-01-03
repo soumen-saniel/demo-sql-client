@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { v4 as uuid } from 'uuid';
+import {v4 as uuid} from 'uuid';
 
 // Dummy data
 const dummyQueries = {
@@ -88,7 +88,7 @@ const actions = {
 
 // Initial state
 export const initialState = {
-  queries: { ...dummyQueries },
+  queries: {...dummyQueries},
 };
 
 // Reducer

@@ -12,7 +12,7 @@ import Search from '../../../components/SearchInput';
 import BorderAllIcon from '@material-ui/icons/BorderAll';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-// Classes
+// Styles
 import classes from './styles';
 
 const TablesSection = ({
