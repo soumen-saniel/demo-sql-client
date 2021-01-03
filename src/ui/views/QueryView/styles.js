@@ -15,4 +15,17 @@ classes.editorContainer = (theme) => css`
   position: relative;
 `;
 
+classes.runButton = css`
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  z-index: 100;
+`;
+
+classes.icon = css`
+  height: 18px;
+  margin-left: 5px;
+  width: 18px;
+`;
+
 export default classes;

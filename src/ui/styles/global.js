@@ -1,7 +1,8 @@
 import {css} from '@emotion/react';
 
-const globatStyles = css`
+const globatStyles = (theme) => css`
   body {
+    color: ${theme.palette.textPrimary};
     background: #FFFFFF;
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;

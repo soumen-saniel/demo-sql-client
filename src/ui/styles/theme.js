@@ -33,10 +33,21 @@ export const materialTheme = createMuiTheme({
   },
   overrides: {
     MuiButton: {
+      containedPrimary: {
+        fontSize: 14,
+        height: 30,
+        padding: '0px 15px',
+        textTransform: 'none',
+      },
       outlinedPrimary: {
         color: theme.palette.textPrimary,
         fontSize: 14,
         textTransform: 'none',
+      },
+    },
+    MuiInput: {
+      root: {
+        height: 25,
       },
     },
   },
