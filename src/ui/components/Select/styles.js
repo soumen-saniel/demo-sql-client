@@ -3,9 +3,10 @@ import {css} from '@emotion/react';
 const classes = {};
 
 classes.root = css`
+  cursor: pointer;
   height: 30px;
   position: relative;
-  width: 200px;
+  width: 150px;
 `;
 
 classes.input = (theme) => css`
@@ -19,6 +20,11 @@ classes.input = (theme) => css`
   outline: none !important;
   padding: 0px 25px 0px 15px;
   width: 100%;
+
+  /* for Firefox */
+  -moz-appearance: none;
+  /* for Chrome */
+  -webkit-appearance: none;
 
   &:placeholder {
     color: ${theme.palette.textLabel};

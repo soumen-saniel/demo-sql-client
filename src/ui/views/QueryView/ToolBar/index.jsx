@@ -1,12 +1,13 @@
 import React from 'react';
 
+import Share from './Share';
+
 // Components
 import Input from '../../../components/Input';
 import SearchInput from '../../../components/SearchInput';
 
 // Icons
 import SaveIcon from '@material-ui/icons/Save';
-import ShareIcon from '@material-ui/icons/Share';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 
 // Styles
@@ -22,10 +23,7 @@ const ToolBar = () => {
         <span>Save</span>
         <SaveIcon css={classes.icon} />
       </div>
-      <div css={classes.button}>
-        <span>Share</span>
-        <ShareIcon css={classes.icon} />
-      </div>
+      <Share />
       <div css={classes.button}>
         <span>Make Copy</span>
         <FileCopyIcon css={classes.icon} />

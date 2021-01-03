@@ -14,13 +14,13 @@ const dummyQueries = {
     history: [],
     members: [{
       email: 'samurai.jack@example.com',
-      permission: 'admin',
+      permission: 'owner',
     }, {
       email: 'jane.doe@example.com',
-      permission: 'write',
+      permission: 'editor',
     }, {
       email: 'aku@example.com',
-      permission: 'read',
+      permission: 'viewer',
     }],
     createdAt: moment(),
   },
@@ -34,10 +34,10 @@ const dummyQueries = {
     history: [],
     members: [{
       email: 'samurai.jack@example.com',
-      permission: 'admin',
+      permission: 'owner',
     }, {
       email: 'jane.doe@example.com',
-      permission: 'write',
+      permission: 'editor',
     }],
     createdAt: moment(),
   },
@@ -52,10 +52,10 @@ const dummyQueries = {
     history: [],
     members: [{
       email: 'samurai.jack@example.com',
-      permission: 'admin',
+      permission: 'owner',
     }, {
       email: 'jane.doe@example.com',
-      permission: 'write',
+      permission: 'editor',
     }],
     createdAt: moment(),
   },
@@ -69,10 +69,10 @@ const dummyQueries = {
     history: [],
     members: [{
       email: 'samurai.jack@example.com',
-      permission: 'admin',
+      permission: 'owner',
     }, {
       email: 'jane.doe@example.com',
-      permission: 'write',
+      permission: 'editor',
     }],
     createdAt: moment(),
   },
@@ -155,7 +155,7 @@ export const createQuery = (query = '') => async (dispatch, getState) => {
       history: [],
       members: [{
         email: state.user.email,
-        permission: 'admin',
+        permission: 'owner',
       }],
       createdAt: moment(),
     };

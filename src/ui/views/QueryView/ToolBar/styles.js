@@ -26,9 +26,9 @@ classes.button = css`
 
 classes.icon = (theme) => css`
   color: ${theme.palette.secondary};
-  height: 15px;
+  height: 18px;
   margin-left: 10px;
-  width: 15px;
+  width: 18px;
 `;
 
 classes.divider = css`
