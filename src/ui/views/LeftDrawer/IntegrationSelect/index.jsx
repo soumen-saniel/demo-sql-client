@@ -1,6 +1,6 @@
 import React from 'react';
 import PropType from 'prop-types';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 // Components
 import Popover from '@material-ui/core/Popover';

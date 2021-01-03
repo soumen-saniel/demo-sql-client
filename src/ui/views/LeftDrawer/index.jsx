@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Resizable } from 're-resizable';
+import React, {useEffect} from 'react';
+import {Resizable} from 're-resizable';
 
 import IntegrationSelect from './IntegrationSelect';
 import TableSection from './TablesSection';
@@ -16,7 +16,7 @@ const LeftDrawer = () => {
   return (
     <Resizable
       css={classes.root}
-      enable={{ right: true }}
+      enable={{right: true}}
       defaultSize={{
         width: 200,
         height: '100vh',

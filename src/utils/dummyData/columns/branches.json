@@ -1,0 +1,11 @@
+{
+  "id": {
+    "type": "INT PRIMARY KEY"
+  },
+  "manager_id": {
+    "type": "INT"
+  },
+  "name": {
+    "type": "VARCHAR(40)"
+  }
+}

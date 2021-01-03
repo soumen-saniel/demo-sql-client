@@ -1,0 +1,27 @@
+[
+  {
+    "id": 0,
+    "manager_id": 1,
+    "name": "Ebidco"
+  },
+  {
+    "id": 1,
+    "manager_id": 1,
+    "name": "Tersanki"
+  },
+  {
+    "id": 2,
+    "manager_id": 4,
+    "name": "Enthaze"
+  },
+  {
+    "id": 3,
+    "manager_id": 2,
+    "name": "Shepard"
+  },
+  {
+    "id": 4,
+    "manager_id": 3,
+    "name": "Dognosis"
+  }
+]

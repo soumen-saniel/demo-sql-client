@@ -1,0 +1,23 @@
+{
+  "id": {
+    "type": "INT PRIMARY KEY"
+  },
+  "branch_id": {
+    "type": "INT"
+  },
+  "email": {
+    "type": "VARCHAR(40)"
+  },
+  "age": {
+    "type": "INT"
+  },
+  "first_name": {
+    "type": "VARCHAR(40)"
+  },
+  "last_name": {
+    "type": "VARCHAR(40)"
+  },
+  "contact": {
+    "type": "VARCHAR(20)"
+  }
+}

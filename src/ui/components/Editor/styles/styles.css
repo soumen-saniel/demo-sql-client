@@ -1,0 +1,21 @@
+.react-codemirror2 {
+  height: 100%;
+}
+
+.CodeMirror {
+  height: 100%;
+  color: inherit;
+}
+
+/* .CodeMirror * {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 1px;
+} */
+
+.CodeMirror pre {
+  padding-left: 20px;
+}

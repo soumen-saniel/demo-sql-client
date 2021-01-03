@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import {createMuiTheme} from '@material-ui/core/styles';
 
 const theme = {
   palette: {
@@ -10,7 +10,7 @@ const theme = {
     textSecondary: '#3E4C59',
     textLabel: '#CFD4D7',
     containerLight: '#EDF1F4',
-    containerDark: '#000000',
+    containerDark: '#191B36',
   },
 };
 
@@ -33,7 +33,6 @@ export const materialTheme = createMuiTheme({
   },
   overrides: {
     MuiButton: {
-      disableRipple: true,
       outlinedPrimary: {
         color: theme.palette.textPrimary,
         fontSize: 14,

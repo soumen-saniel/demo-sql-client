@@ -1,0 +1,42 @@
+.ag-theme-material {
+  color: #3E4C59;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 400px;
+}
+
+.ag-theme-material .ag-header {
+  border-color: #EDF1F4;
+}
+
+.ag-theme-material .ag-header-cell {
+  align-items: center;
+  border-left: 1px solid #EDF1F4;
+  color: #171717;
+  display: flex;
+  font-size: 12px;
+}
+
+.ag-theme-material .ag-cell {
+  align-items: center;
+  border-left: 1px solid #EDF1F4 !important;
+  display: flex;
+  line-height: 14px;
+}
+
+.ag-theme-material .ag-cell-focus {
+  border-color: transparent !important;
+  background: #CFD4D7;
+}
+
+.ag-theme-material .ag-row {
+  border-color: #EDF1F4;
+}
+
+.ag-theme-material .ag-icon {
+  color: #62E1FC;
+}
+
+.ag-theme-material .ag-paging-panel {
+  height: 40px;
+}
