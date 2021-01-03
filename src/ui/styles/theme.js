@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 import {createMuiTheme} from '@material-ui/core/styles';
 
 const theme = {
@@ -69,6 +70,45 @@ export const materialTheme = createMuiTheme({
       },
       indicator: {
         display: 'none',
+      },
+    },
+    MuiAccordion: {
+      root: {
+        boxShadow: 'none',
+        margin: '0px !important',
+        padding: '0px !important',
+        '&:before': {
+          display: 'none',
+        },
+      },
+    },
+    MuiAccordionSummary: {
+      root: {
+        padding: '0px !important',
+        minHeight: '30px !important',
+      },
+      expandIcon: {
+        color: '#62E1FC',
+        padding: '0px !important',
+        margin: '0px !important',
+      },
+      content: {
+        margin: '0px !important',
+        minHeight: '0px !important',
+      },
+    },
+    MuiAccordionDetails: {
+      root: {
+        margin: 0,
+        padding: 0,
+        display: 'block',
+      },
+    },
+    MuiExpansionPanel: {
+      root: {
+        '&:before': {
+          display: 'none',
+        },
       },
     },
   },

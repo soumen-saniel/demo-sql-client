@@ -18,7 +18,7 @@ const LeftDrawer = () => {
       css={classes.root}
       enable={{right: true}}
       defaultSize={{
-        width: 200,
+        width: 250,
         height: '100vh',
       }}
       minWidth={200}

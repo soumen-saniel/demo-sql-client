@@ -4,8 +4,9 @@ const classes = {};
 
 classes.root = css`
   height: 30px;
+  max-width: 200px;
   position: relative;
-  width: 200px;
+  width: 100%;
 `;
 
 classes.input = (theme) => css`
