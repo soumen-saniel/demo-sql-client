@@ -1,5 +1,4 @@
 module.exports = {
-  // pathPrefix: '/demo-sql-client',
   siteMetadata: {
     title: 'Demo sql client',
   },
@@ -18,6 +17,7 @@ module.exports = {
         display: 'swap',
       },
     },
+    // Plugin fot using material UI
     {
       resolve: 'gatsby-plugin-material-ui',
       options: {},
