@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 // Views
+import Home from '../views/Home';
 import LeftDrawer from '../views/LeftDrawer';
 import QueryView from '../views/QueryView';
 import TabBar from '../views/TabBar';
@@ -19,6 +20,7 @@ const App = ({
       <div css={classes.mainContainer}>
         <TabBar />
         {tabSelected && <QueryView />}
+        {!tabSelected && <Home />}
       </div>
     </main>
   );
