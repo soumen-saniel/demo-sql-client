@@ -42,18 +42,30 @@ classes.historyList = (theme) => css`
 
 classes.history = css`
   align-items: center;
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   overflow; hidden;
   padding: 5px 0px;
-  white-space: nowrap;
   width: 100%;
+`;
+
+classes.historyQuery = css`
+  flex-grow: 1;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 classes.dateTime = (theme) => css`
   color: ${theme.palette.textSecondary};
+  flex: 0 0 115px;
   font-size: 12px;
   margin-left: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export default classes;

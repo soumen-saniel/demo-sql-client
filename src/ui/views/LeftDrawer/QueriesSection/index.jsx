@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import moment from 'moment';
 
 // Actions
-import {addTab} from '../../../../state/tabs';
+import {addTab, updateTab} from '../../../../state/tabs';
 import {deleteQuery} from '../../../../state/queries';
 
 // Components
@@ -26,6 +26,7 @@ const QueriesSection = ({
   currentTab,
   deleteQuery,
   queries,
+  updateTab,
 }) => {
   const [expanded, setExpanded] = useState(true);
   const [search, setSearch] = useState('');
@@ -59,8 +60,15 @@ const QueriesSection = ({
                 <div
                   key={index}
                   css={classes.history}
+                  onClick={() => {
+                    updateTab({
+                      id: currentTab.id,
+                      unsavedQuery: history.query,
+                      saved: false,
+                    });
+                  }}
                 >
-                  <div>{history.query}</div>
+                  <div css={classes.historyQuery}>{history.query}</div>
                   <div css={classes.dateTime}>
                     {moment(history.createdAt).fromNow()}
                   </div>
@@ -97,6 +105,7 @@ const QueriesSection = ({
 QueriesSection.propTypes = {
   addTab: PropTypes.func,
   currentTab: PropTypes.shape({
+    id: PropTypes.string,
     queryId: PropTypes.string,
   }),
   deleteQuery: PropTypes.func,
@@ -108,6 +117,7 @@ QueriesSection.propTypes = {
       createdAt: PropTypes.object,
     })),
   })),
+  updateTab: PropTypes.func,
 };
 
 QueriesSection.defaultProps = {
@@ -121,7 +131,7 @@ const mapStateToProps = (state) => {
     return query.integrationId === integration.id;
   });
   const currentTab = state.currentTab !== null ?
-    state.tabs[state.currentTab] : {};
+    state.tabs[state.currentTab] || {} : {};
 
   return {
     currentTab,
@@ -132,4 +142,5 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   addTab,
   deleteQuery,
+  updateTab,
 })(QueriesSection);
