@@ -3,11 +3,13 @@
 A dummy web SQL client UI.
 
 ## Tech stack
-- Gatsby
-- Redux
-- Emotion CSS
-- Material UI
-- Netlify
+```
+Gatsby
+Redux
+Emotion CSS
+Material UI
+Netlify
+```
 
 ## Folder Structure
 ```
@@ -29,4 +31,16 @@ src
 yarn
 # Start development server
 yarn start
+```
+
+## Performance
+### [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fsql-client-demo.netlify.app%2F&tab=desktop)
+Testing for Desktop:
+```
+First Contentful Paint 0.7s
+Time to Interactive 1.1s
+Speed Index 1.2s
+Total Blocking Time 30ms
+Largest Contentful Paint 0.7s
+Cumulative Layout Shift 0.006
 ```
