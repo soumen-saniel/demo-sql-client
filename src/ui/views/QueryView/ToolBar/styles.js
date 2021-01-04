@@ -14,7 +14,7 @@ classes.root = (theme) => css`
   width: 100%;
 `;
 
-classes.button = css`
+classes.button = (theme, saved) => css`
   align-items: center;
   cursor: pointer;
   display: flex;
@@ -22,13 +22,22 @@ classes.button = css`
   font-weight: 500;
   justify-content: flex-start;
   margin-left: 20px;
+
+  ${saved && `
+    cursor: default;
+    color: ${theme.palette.textLabel};
+  `}
 `;
 
-classes.icon = (theme) => css`
+classes.icon = (theme, saved) => css`
   color: ${theme.palette.secondary};
   height: 18px;
   margin-left: 10px;
   width: 18px;
+
+  ${saved && `
+    color: ${theme.palette.textLabel};
+  `}
 `;
 
 classes.divider = css`

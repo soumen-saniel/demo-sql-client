@@ -1,5 +1,6 @@
 import moment from 'moment';
 import {v4 as uuid} from 'uuid';
+import dedent from 'dedent';
 
 import {addTab, deleteTab} from '../tabs';
 
@@ -10,7 +11,7 @@ const dummyQueries = {
     id: '0f1690e8-714f-4309-9194-a31d4e100314',
     integrationId: 'e145d368-0eab-4e53-b448-44ada1472182',
     name: 'Query 1',
-    query: `
+    query: dedent`
       SELECT * FROM employees;
     `,
     history: [],
@@ -30,7 +31,7 @@ const dummyQueries = {
     id: '672cea3c-4cb4-47c8-9167-deb4e064fcec',
     integrationId: 'e145d368-0eab-4e53-b448-44ada1472182',
     name: 'Query 2',
-    query: `
+    query: dedent`
       SELECT * FROM branches;
     `,
     history: [],
@@ -48,7 +49,7 @@ const dummyQueries = {
     id: '7e651ed8-903a-452f-9a37-f15d3c11a078',
     integrationId: 'd1dc5505-555c-4ae5-a0b3-5ed8a5119fd1',
     name: 'Query 1',
-    query: `
+    query: dedent`
       SELECT * FROM employees;
     `,
     history: [],
@@ -65,7 +66,7 @@ const dummyQueries = {
     id: '6c5e6db0-bbff-4dd4-b52f-b05cd5bc3ef5',
     integrationId: 'd1dc5505-555c-4ae5-a0b3-5ed8a5119fd1',
     name: 'Query 2',
-    query: `
+    query: dedent`
       SELECT * FROM branches;
     `,
     history: [],
@@ -145,14 +146,15 @@ const Reducer = (state = initialState, action) => {
 /**
  * Create new query
  * @param {string} query
+ * @param {string} name
  */
-export const createQuery = (query = '') => (dispatch, getState) => {
+export const createQuery = (query = '', name) => (dispatch, getState) => {
   const state = getState();
   if (state.currentIntegration) {
     const newQuery = {
       id: uuid(),
       integrationId: state.currentIntegration,
-      name: 'Untitled Query',
+      name: name || 'Untitled Query',
       query,
       history: [],
       members: [{
@@ -205,12 +207,14 @@ export const deleteQuery = (queryId) => (dispatch, getState) => {
   });
 };
 /**
- * Save query histor. Only latest 10 are saved
- * @param {object} query
+ * Save query history. Only latest 10 are saved
+ * @param {string} queryId
+ * @param {string} queryString
  */
-export const saveHistory = (query = {}) => (dispatch, getState) => {
+export const saveHistory = (queryId, queryString) => (dispatch, getState) => {
   const state = getState();
-  if (state.queries[query.id]) {
+  const query = state.queries[queryId];
+  if (query) {
     dispatch({
       type: actions.UPDATE_QUERY,
       payload: {
@@ -218,10 +222,10 @@ export const saveHistory = (query = {}) => (dispatch, getState) => {
         ...query,
         history: [
           {
-            query: query.query,
+            query: queryString,
             createdAt: moment(),
           },
-          ...state.queries[query.id].history.map((history, index) => index < 9),
+          ...query.history.slice(0, 8),
         ],
       },
     });
@@ -309,7 +313,8 @@ export const removeTeamMember = (email, queryId) => (dispatch, getState) => {
   const query = Object.values(state.queries)
       .find((item) => item.id === queryId);
   if (query && email.trim() !== state.user.email) {
-    const find = query.members.findIndex((member) => member.email === email.trim);
+    const find = query.members
+        .findIndex((member) => member.email === email.trim());
     if (find > -1) {
       query.members = query.members
           .filter((member) => member.email !== email.trim());

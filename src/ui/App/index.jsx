@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 // Views
 import LeftDrawer from '../views/LeftDrawer';
@@ -8,18 +10,28 @@ import TabBar from '../views/TabBar';
 // Styles
 import classes from './styles';
 
-const App = () => {
-  useEffect(() => {});
-
+const App = ({
+  tabSelected,
+}) => {
   return (
     <main css={classes.root}>
       <LeftDrawer />
       <div css={classes.mainContainer}>
         <TabBar />
-        <QueryView />
+        {tabSelected && <QueryView />}
       </div>
     </main>
   );
 };
 
-export default App;
+App.propTypes = {
+  tabSelected: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    tabSelected: state.currentTab !== null,
+  };
+};
+
+export default connect(mapStateToProps)(App);

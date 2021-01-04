@@ -1,6 +1,6 @@
 import React from 'react';
-import rows from '../../../../utils/dummyData/rows/employees.json';
-import columns from '../../../../utils/dummyData/columns/employees.json';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 // Components
 import DataGrid from '../../../components/DataGrid';
@@ -8,17 +8,41 @@ import DataGrid from '../../../components/DataGrid';
 // Styles
 import classes from './styles';
 
-const Result = () => {
+const Result = ({
+  currentTab,
+}) => {
+  if (!currentTab.data) {
+    return null;
+  }
+
   return (
     <div css={classes.root}>
       <DataGrid
-        data={{
-          rows,
-          columns,
-        }}
+        data={currentTab.data}
       />
     </div>
   );
 };
 
-export default Result;
+Result.propTypes = {
+  currentTab: PropTypes.shape({
+    data: PropTypes.shape({
+      rows: PropTypes.arrayOf(PropTypes.object),
+      columns: PropTypes.object,
+    }),
+    loading: PropTypes.bool,
+  }),
+  updateTab: PropTypes.func,
+};
+
+const mapStateToProps = (state) => {
+  const currentTab = state.currentTab !== null ?
+    state.tabs[state.currentTab] :
+    {};
+
+  return {
+    currentTab,
+  };
+};
+
+export default connect(mapStateToProps)(Result);

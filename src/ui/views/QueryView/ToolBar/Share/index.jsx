@@ -2,6 +2,13 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
+// Actions
+import {
+  addTeamMember,
+  removeTeamMember,
+  updateMemberPermission,
+} from '../../../../../state/queries';
+
 // Components
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -17,14 +24,23 @@ import ShareIcon from '@material-ui/icons/Share';
 // Styles
 import classes from './styles';
 
-const permissions = [
+const allPermissions = [
   'owner',
   'editor',
   'viewer',
 ];
 
+const permissions = [
+  'editor',
+  'viewer',
+];
+
 const Share = ({
+  addTeamMember,
+  currentQuery,
   members,
+  removeTeamMember,
+  updateMemberPermission,
   user,
 }) => {
   const [open, setOpen] = useState(false);
@@ -88,6 +104,13 @@ const Share = ({
             <Button
               color='primary'
               disableRipple
+              onClick={() => {
+                if (email.trim()) {
+                  addTeamMember(email, permission, currentQuery.id);
+                  setEmail('');
+                  setPermission('editor');
+                }
+              }}
               variant='contained'
             >
               Share
@@ -106,13 +129,22 @@ const Share = ({
                   <div css={classes.email}>{member.email}</div>
                   <Select
                     disabled={isOwner}
-                    onChange={() => {}}
-                    options={permissions}
+                    onChange={(e) => {
+                      updateMemberPermission(
+                          member.email,
+                          e.target.value,
+                          currentQuery.id,
+                      );
+                    }}
+                    options={isOwner ? allPermissions : permissions}
                     value={member.permission}
                   />
                   {!isSelf && (
                     <CloseIcon
                       css={classes.removeIcon}
+                      onClick={() => {
+                        removeTeamMember(member.email, currentQuery.id);
+                      }}
                     />
                   )}
                 </div>
@@ -126,10 +158,16 @@ const Share = ({
 };
 
 Share.propTypes = {
+  addTeamMember: PropTypes.func,
+  currentQuery: PropTypes.shape({
+    id: PropTypes.string,
+  }),
   members: PropTypes.arrayOf(PropTypes.shape({
     email: PropTypes.string,
     permission: PropTypes.string,
   })),
+  removeTeamMember: PropTypes.func,
+  updateMemberPermission: PropTypes.func,
   user: PropTypes.shape({
     email: PropTypes.string,
   }),
@@ -141,19 +179,20 @@ Share.defaultProps = {
 };
 
 const mapStateToProps = (state) => {
+  const currentTab = state.currentTab !== null ?
+    state.tabs[state.currentTab] || {} :
+    {};
+  const currentQuery = state.queries[currentTab.queryId] || {};
+
   return {
-    members: [{
-      email: 'samurai.jack@example.com',
-      permission: 'owner',
-    }, {
-      email: 'jane.doe@example.com',
-      permission: 'editor',
-    }, {
-      email: 'aku@example.com',
-      permission: 'viewer',
-    }],
+    currentQuery,
+    members: currentQuery.members || [],
     user: state.user,
   };
 };
 
-export default connect(mapStateToProps)(Share);
+export default connect(mapStateToProps, {
+  addTeamMember,
+  removeTeamMember,
+  updateMemberPermission,
+})(Share);

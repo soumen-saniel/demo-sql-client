@@ -45,6 +45,9 @@ export const materialTheme = createMuiTheme({
         fontSize: 14,
         textTransform: 'none',
       },
+      disabled: {
+        opacity: 1,
+      },
     },
     MuiInput: {
       root: {
