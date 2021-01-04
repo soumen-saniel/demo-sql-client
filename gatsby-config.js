@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: '/demo-sql-client',
   siteMetadata: {
     title: 'Demo sql client',
   },
