@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import debounce from 'lodash/debounce';
@@ -29,6 +29,13 @@ const ToolBar = ({
 }) => {
   const [search, setSearch] = useState(currentTab.search || '');
   const [name, setName] = useState(currentTab.name || '');
+
+  useEffect(() => {
+    if (currentTab.id) {
+      setSearch(currentTab.search || '');
+      setName(currentTab.name || '');
+    }
+  }, [currentTab.id, currentTab.search, currentTab.name]);
 
   const handleOnSearchChange = useRef(debounce((currentTab, search) => {
     updateTab({

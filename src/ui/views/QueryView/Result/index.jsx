@@ -19,6 +19,7 @@ const Result = ({
     <div css={classes.root}>
       <DataGrid
         data={currentTab.data}
+        search={currentTab.search}
       />
     </div>
   );
@@ -31,6 +32,7 @@ Result.propTypes = {
       columns: PropTypes.object,
     }),
     loading: PropTypes.bool,
+    search: PropTypes.string,
   }),
   updateTab: PropTypes.func,
 };

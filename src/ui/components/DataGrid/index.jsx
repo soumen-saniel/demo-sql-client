@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {AgGridColumn, AgGridReact} from 'ag-grid-react';
 
@@ -10,7 +10,10 @@ import classes from './styles/styles';
 
 const DataGrid = ({
   data,
+  search,
 }) => {
+  const agGrid = useRef();
+
   const rowData = useMemo(() => {
     return data.rows;
   }, [data.rows]);
@@ -68,9 +71,16 @@ const DataGrid = ({
     return null;
   }, [data.columns]);
 
+  useEffect(() => {
+    if (agGrid.current) {
+      agGrid.current.api.setQuickFilter(search);
+    }
+  }, [agGrid.current, search]);
+
   return (
     <div className='ag-theme-material' css={classes.root}>
       <AgGridReact
+        ref={agGrid}
         headerHeight={30}
         paginationAutoPageSize
         pagination
@@ -88,6 +98,7 @@ DataGrid.propTypes = {
     rows: PropTypes.arrayOf(PropTypes.shape({})),
     columns: PropTypes.shape({}),
   }),
+  search: PropTypes.string,
 };
 
 DataGrid.defaultProps = {
@@ -95,6 +106,7 @@ DataGrid.defaultProps = {
     rows: [],
     columns: {},
   },
+  search: '',
 };
 
 export default DataGrid;

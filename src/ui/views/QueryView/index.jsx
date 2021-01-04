@@ -52,8 +52,9 @@ const QueryView = ({
 
       updateTab({
         id: currentTab.id,
-        loading: false,
         data,
+        loading: false,
+        search: '',
       });
     } catch (err) {
       updateTab({
