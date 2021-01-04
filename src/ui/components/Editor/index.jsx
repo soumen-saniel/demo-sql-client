@@ -47,7 +47,7 @@ const Editor = ({
             showHint.current.cancel();
           }
         }}
-        onBeforeChange={(editor, data, newValue) => {
+        onChange={(editor, data, newValue) => {
           setCode(newValue);
           handleOnChange(newValue);
         }}

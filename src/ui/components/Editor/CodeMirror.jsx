@@ -1,40 +1,38 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import CodeMirror from 'codemirror';
-import {Controlled as CodeMirrorEditor} from 'react-codemirror2';
 
 // Styles
-import 'codemirror/mode/sql/sql';
-import 'codemirror/addon/hint/show-hint';
-import 'codemirror/addon/hint/sql-hint';
-import 'codemirror/addon/lint/lint';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/addon/hint/show-hint.css';
 import 'codemirror/addon/lint/lint.css';
 import './styles/monokai.css';
 import './styles/styles.css';
 
-const editorOptions = {
-  hint: CodeMirror.hint.sql,
-  indentWithTabs: true,
-  lineNumbers: true,
-  matchClosing: true,
-  mode: 'sql',
-  scrollbarStyle: null,
-  tabSize: 2,
-  theme: 'monokai',
-};
+let CodeMirrorEditor = null;
+let editorOptions = {};
+if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
+  const CodeMirror = require('codemirror');
+  CodeMirrorEditor = require('react-codemirror2').UnControlled;
+  require('codemirror/mode/sql/sql');
+  require('codemirror/addon/hint/show-hint');
+  require('codemirror/addon/hint/sql-hint');
+  require('codemirror/addon/lint/lint');
+  require('codemirror/addon/hint/show-hint');
+
+  editorOptions = {
+    hint: CodeMirror.hint.sql,
+    indentWithTabs: true,
+    lineNumbers: true,
+    matchClosing: true,
+    mode: 'sql',
+    scrollbarStyle: null,
+    tabSize: 2,
+    theme: 'monokai',
+  };
+}
 
 const EditorComponent = (props) => {
-  const [ready, setRedy] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setRedy(true);
-    }
-  }, []);
-
-  if (ready) {
+  if (CodeMirrorEditor) {
     return (
       <CodeMirrorEditor
         options={{...editorOptions, ...props.options}}
