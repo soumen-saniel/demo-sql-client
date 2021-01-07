@@ -4,6 +4,7 @@ A dummy web SQL client UI.
 
 ## Tech stack
 ```
+React
 Gatsby
 Redux
 Emotion CSS
